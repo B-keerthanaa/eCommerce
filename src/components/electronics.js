@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import './category.css';
 import { Link } from "react-router-dom";
-
+import useFetch from "./customhooks";
 function Electronics() {
 
-  const [things, setThings] = useState([]);
+  const [things] = useFetch("https://fakestoreapi.com/products/category/electronics");
 
-  useEffect(() => {
-
-    fetch('https://fakestoreapi.com/products/category/electronics')
-      .then(res => res.json())
-      .then(json => setThings(json))
-  }, []);
-
-
-  return (
+ return (
     <>
       <div className="d-flex justify content-center ">
         {

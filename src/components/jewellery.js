@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import './category.css';
 import { Link } from "react-router-dom";
+import useFetch from "./customhooks";
 
 function Jewellery() {
-
-  const [things, setThings] = useState([]);
-
-  useEffect(() => {
-
-    fetch('https://fakestoreapi.com/products/category/jewelery')
-      .then(res => res.json())
-      .then(json => setThings(json))
-  }, []);
-
+  const [things] = useFetch("https://fakestoreapi.com/products/category/jewelery");
 
   return (
     <>
