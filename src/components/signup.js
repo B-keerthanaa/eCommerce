@@ -1,104 +1,84 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './signup.css';
+
 const Signup = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [successMsg, setSuccessMsg] = useState('');
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
-  const handleSignup = async (e) => {
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      const res = fetch('https://fakestoreapi.com/users', {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          username,
-          password,
-          name: {
-            firstname,
-            lastname
-          },
-          address: {
-            city: 'Sample City',
-            street: '123 Sample Street',
-            number: 1,
-            zipcode: '12345-6789',
-            geolocation: {
-              lat: '0',
-              long: '0'
-            }
-          },
-          phone: '123456789'
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!res.ok) {
-        throw new Error('Signup failed');
-      }
-
-      const data = await res.json();
-      console.log('Signup successful:', data);
-      setSuccessMsg('Signup successful! Redirecting to login...');
-      setTimeout(() => navigate('/category.js'), 2000); // Redirect after 2 seconds
-    } catch (err) {
-      //console.error(err);
-      setError('Signup failed. Try again.');
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match!');
+      return;
     }
+    console.log('Form submitted:', formData);
   };
 
   return (
-    <div >
-      <h2>Signup</h2>
-      <form onSubmit={handleSignup}>
-        <input
-          type="text"
-          placeholder="First Name"
-          value={firstname}
-          onChange={(e) => setFirstname(e.target.value)}
-          required
-        /><br /><br />
-        <input
-          type="text"
-          placeholder="Last Name"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-          required
-        /><br /><br />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        /><br /><br />
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        /><br /><br />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        /><br /><br />
-        <button type="submit">Signup</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {successMsg && <p style={{ color: 'green' }}>{successMsg}</p>}
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <centre>
+      <div className="card shadow-sm p-4" style={{ width: '100%', maxWidth: '450px', borderRadius: '1rem' }}>
+        <h2 className="text-center text-primary mb-4">Sign Up</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">UserName</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email Address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              placeholder="Create a password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary w-100">Create Account</button>
+        </form>
+        <div className="text-center mt-3">
+          <small className="text-muted">
+            Already have an account? <a href="/login">Log In</a>
+          </small>
+        </div>
+      </div>
+      </centre>
     </div>
   );
 };

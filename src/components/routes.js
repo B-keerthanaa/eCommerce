@@ -9,6 +9,10 @@ import Womens from "./womens_cloth";
 import Product from "./productdetails";
 import Login from "./login";
 import Signup from "./signup";
+import All from "./allproducts";
+import About from "./about";
+import Services from "./services";
+import Contact from "./contact";
 class Routingdata extends React.Component{
     render(){
         return(
@@ -24,6 +28,10 @@ class Routingdata extends React.Component{
                 <Route path="/:id" element={<Product />}/>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/allproducts" element={<All />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/contact" element={<Contact />} />
                 </Route>
             </Routes>
             </BrowserRouter>

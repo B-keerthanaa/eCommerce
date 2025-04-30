@@ -1,21 +1,22 @@
 import React from "react";
-import './category.css';
 import { Link } from "react-router-dom";
 import useFetch from "./customhooks";
+import "./category.css";
 
-function Mens() {
-  const [things] = useFetch("https://fakestoreapi.com/products/category/men's clothing");
 
-  return (
+
+function All() {
+
+    const [things] = useFetch("https://fakestoreapi.com/products");
+
+return (
     <>
-      <div className="d-flex justify content-center flex wrap ">
+      <div className="d-flex justify-content-center flex wrap ">
         {
           things.map((v) =>
             <>
-            
-              <div className="card" >
-              <div className="card-body text-center d-flex flex-column justify-content-between">
-
+              <div className="card">
+                <div className="card-body">
                   <h5>Product id:{v.id}</h5>
                   <img src={v.image} height="200px" width="200px" ></img>
                   <h5>{v.title}</h5>
@@ -33,5 +34,6 @@ function Mens() {
 
     </>
   )
+   
 }
-export default Mens;
+export default All;

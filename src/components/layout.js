@@ -3,12 +3,15 @@ import {Outlet} from "react-router-dom";
 
 import Header from "./header";
 import Footer from "./footer";
+import Submenu from "./submenu";
+import Category from "./category";
 
-class Layout extends React.Component{
-    render(){
+function Layout(){
+     
         return(
             <>
             <Header />
+             <Submenu />
             <section>
                 <article>
                     <Outlet />
@@ -18,5 +21,5 @@ class Layout extends React.Component{
             </>
         )
     }
-}
+
 export default Layout;

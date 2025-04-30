@@ -12,19 +12,19 @@ function Womens() {
         {
           things.map((v) =>
             <>
-            <div className="container">
+           
               <div className="card" >
-                <div className="card-body">
+              <div className="card-body text-center d-flex flex-column justify-content-between">
 
                   <h5>Product id:{v.id}</h5>
                   <img src={v.image} height="200px" width="200px" ></img>
                   <h5>{v.title}</h5>
                   <h5>Cost ${v.price}</h5>
-                  <Link to={`/${v.id}`}>
-                    <button className="btn btn-primary">Buy Now</button></Link>
+                  <Link to={`/${v.id}`} className="mt-auto">
+                    <button className="btn btn-primary">View Details</button></Link>
                 </div>
               </div>
-</div>
+
             </>
 
           )}
